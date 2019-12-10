@@ -9,3 +9,14 @@ C:\Users\zissimouj\source\repos\AdventCalendar\AdventCalendar\obj\Debug\netcorea
 C:\Users\zissimouj\source\repos\AdventCalendar\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.AssemblyInfo.cs
 C:\Users\zissimouj\source\repos\AdventCalendar\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.dll
 C:\Users\zissimouj\source\repos\AdventCalendar\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.pdb
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.exe
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.deps.json
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.runtimeconfig.json
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.runtimeconfig.dev.json
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.dll
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\bin\Debug\netcoreapp3.0\AdventCalendar.pdb
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.csprojAssemblyReference.cache
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.AssemblyInfoInputs.cache
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.AssemblyInfo.cs
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.dll
+C:\Users\zissimouj\Documents\Projects\Advent-Of-Code\AdventCalendar\obj\Debug\netcoreapp3.0\AdventCalendar.pdb
