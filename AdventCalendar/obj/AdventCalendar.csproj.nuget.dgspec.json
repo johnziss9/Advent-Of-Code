@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zissimouj\\source\\repos\\AdventCalendar\\AdventCalendar\\AdventCalendar.csproj": {}
+    "C:\\Users\\zissimouj\\Documents\\Projects\\Advent-Of-Code\\AdventCalendar\\AdventCalendar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zissimouj\\source\\repos\\AdventCalendar\\AdventCalendar\\AdventCalendar.csproj": {
+    "C:\\Users\\zissimouj\\Documents\\Projects\\Advent-Of-Code\\AdventCalendar\\AdventCalendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zissimouj\\source\\repos\\AdventCalendar\\AdventCalendar\\AdventCalendar.csproj",
+        "projectUniqueName": "C:\\Users\\zissimouj\\Documents\\Projects\\Advent-Of-Code\\AdventCalendar\\AdventCalendar.csproj",
         "projectName": "AdventCalendar",
-        "projectPath": "C:\\Users\\zissimouj\\source\\repos\\AdventCalendar\\AdventCalendar\\AdventCalendar.csproj",
+        "projectPath": "C:\\Users\\zissimouj\\Documents\\Projects\\Advent-Of-Code\\AdventCalendar\\AdventCalendar.csproj",
         "packagesPath": "C:\\Users\\zissimouj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zissimouj\\source\\repos\\AdventCalendar\\AdventCalendar\\obj\\",
+        "outputPath": "C:\\Users\\zissimouj\\Documents\\Projects\\Advent-Of-Code\\AdventCalendar\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
