@@ -9,7 +9,7 @@ namespace AdventCalendar
         static void Main(string[] args)
         {
             string line;
-            StreamReader file = new StreamReader(@"C:/Users/zissimouj/Desktop/ad.txt");
+            StreamReader file = new StreamReader(@"Input.txt");
             List<int> opcodes = new List<int>();
             int currentPosition = 0;
             int firstNumPosition = 0;
