@@ -11,6 +11,7 @@ namespace AdventCalendar
             string line;
             StreamReader file = new StreamReader(@"Input.txt");
             List<int> opcodes = new List<int>();
+            bool halt = false;
             int currentPosition = 0;
             int firstNumPosition = 0;
             int secondNumPosition = 0;
@@ -27,7 +28,7 @@ namespace AdventCalendar
             opcodes[1] = 12;
             opcodes[2] = 2;
 
-            while (currentPosition < opcodes.Count)
+            while (halt == false && currentPosition < opcodes.Count)
             {
                 switch (opcodes[currentPosition])
                 {
@@ -47,7 +48,7 @@ namespace AdventCalendar
                         break;
                     case 99:
                         Console.WriteLine(opcodes[0]);
-                        Console.ReadLine();
+                        halt = true;
                         break;
                     default:
                         currentPosition++;
