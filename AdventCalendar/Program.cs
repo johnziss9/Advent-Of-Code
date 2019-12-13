@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AdventCalendar
 {
@@ -10,73 +11,107 @@ namespace AdventCalendar
         {
             string line;
             StreamReader file = new StreamReader(@"Input.txt");
-            List<int> opcodes = new List<int>();
-            List<int> opcodesInitial = new List<int>();
-            bool halt = false;
-            int currentPosition = 0;
-            int firstNumPosition = 0;
-            int secondNumPosition = 0;
-            int thirdNumPosition = 0;
+            List<string> positions = new List<string>();
+            List<string> intersections = new List<string>();
+            List<string> totals = new List<string>();
+            int currentHorPosition = 0;
+            int currentVerPosition = 0;
 
-            string[] codes = null;
+            int lineCounter = 0;
 
+            string[] directionsSplit = null;
+
+            // Read first line
             while ((line = file.ReadLine()) != null)
             {
-                codes = line.Split(',');
+                directionsSplit = line.Split(',');
 
-                foreach (var code in codes)
+                if (lineCounter == 0)
                 {
-                    opcodes.Add(Convert.ToInt32(code));
-                    opcodesInitial.Add(Convert.ToInt32(code));
-                }
-            }
-
-            for (int i = 0; i < 100; i++)
-            {
-                for (int j = 0; j < 100; j++)
-                {
-                    // Clearing list and refilling it with original values
-                    opcodes.Clear();
-
-                    foreach (var code in codes)
+                    foreach (var direction in directionsSplit)
                     {
-                        opcodes.Add(Convert.ToInt32(code));
-                    }
+                        // Left no is horizontal and right is vertical
 
-                    halt = false;
-
-                    opcodes[1] = i;
-                    opcodes[2] = j;
-
-                    while (halt == false && currentPosition < opcodes.Count)
-                    {
-                        switch (opcodes[currentPosition])
+                        switch (direction[0])
                         {
-                            case 1:
-                                firstNumPosition = opcodes[currentPosition + 1];
-                                secondNumPosition = opcodes[currentPosition + 2];
-                                thirdNumPosition = opcodes[currentPosition + 3];
-                                opcodes[thirdNumPosition] = opcodes[firstNumPosition] + opcodes[secondNumPosition];
-                                currentPosition += 4;
+                            case 'R':
+                                for(int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                    positions.Add((currentHorPosition + i) + ":" + currentVerPosition);
+                                currentHorPosition += Convert.ToInt32(direction.Substring(1));
                                 break;
-                            case 2:
-                                firstNumPosition = opcodes[currentPosition + 1];
-                                secondNumPosition = opcodes[currentPosition + 2];
-                                thirdNumPosition = opcodes[currentPosition + 3];
-                                opcodes[thirdNumPosition] = opcodes[firstNumPosition] * opcodes[secondNumPosition];
-                                currentPosition += 4;
+                            case 'U':
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                    positions.Add(currentHorPosition + ":" + (currentVerPosition + i));
+                                currentVerPosition += Convert.ToInt32(direction.Substring(1));
                                 break;
-                            case 99:
-                                if (opcodes[0] == 19690720)
-                                    Console.WriteLine(100 * i + j);
-                                halt = true;
-                                currentPosition = 0;
+                            case 'L':
+                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                    positions.Add((currentHorPosition - 1) + ":" + currentVerPosition);
+                                currentHorPosition -= Convert.ToInt32(direction.Substring(1));
+                                break;
+                            case 'D':
+                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                    positions.Add(currentHorPosition + ":" + (currentVerPosition - i));
+                                currentVerPosition += Convert.ToInt32(direction.Substring(1));
                                 break;
                             default:
-                                currentPosition++;
                                 break;
                         }
                     }
+
+                    lineCounter++;
+                }
+                else
+                {
+                    currentHorPosition = 0;
+                    currentVerPosition = 0;
+
+                    foreach (var direction in directionsSplit)
+                    {
+                        switch (direction[0])
+                        {
+                            case 'R':
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                {
+                                    currentHorPosition += i;
+                                    if (positions.Contains(i + ":" + currentVerPosition))
+                                        intersections.Add(i + ":" + currentVerPosition);
+                                }
+                                break;
+                            case 'U':
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                {
+                                    currentHorPosition += i;
+                                    if (positions.Contains(currentHorPosition + ":" + i))
+                                        intersections.Add(currentHorPosition + ":" + i);
+                                }
+                                break;
+                            case 'L':
+                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                {
+                                    currentHorPosition -= i;
+                                    if (positions.Contains(i + ":" + currentVerPosition))
+                                        intersections.Add(i + ":" + currentVerPosition);
+                                }
+                                break;
+                            case 'D':
+                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                {
+                                    currentHorPosition -= i;
+                                    if (positions.Contains(currentHorPosition + ":" + i))
+                                        intersections.Add(currentHorPosition + ":" + i);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                foreach (var intersection in intersections)
+                {
+                    string[] items = intersection.Split(":");
+                    totals.Add(items[0] + items[1]);
                 }
             }
         }
