@@ -9,25 +9,23 @@ namespace AdventCalendar
     {
         static void Main(string[] args)
         {
-            string line;
-            StreamReader file = new StreamReader(@"Input.txt");
+            int lineCount = 0;
+            string line = "";
+            string[] directionsSplit = null;
+            int cable1Horizontal = 0;
+            int cable1Vertical = 0;
             List<string> positions = new List<string>();
             List<string> intersections = new List<string>();
-            List<string> totals = new List<string>();
-            int currentHorPosition = 0;
-            int currentVerPosition = 0;
+            List<int> totals = new List<int>();
+            
+            StreamReader file = new StreamReader(@"Input.txt");
 
-            int lineCounter = 0;
-
-            string[] directionsSplit = null;
-
-            // Read first line
             while ((line = file.ReadLine()) != null)
             {
-                directionsSplit = line.Split(',');
-
-                if (lineCounter == 0)
+                if (lineCount == 0)
                 {
+                    directionsSplit = line.Split(',');
+
                     foreach (var direction in directionsSplit)
                     {
                         // Left no is horizontal and right is vertical
@@ -35,83 +33,99 @@ namespace AdventCalendar
                         switch (direction[0])
                         {
                             case 'R':
-                                for(int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
-                                    positions.Add((currentHorPosition + i) + ":" + currentVerPosition);
-                                currentHorPosition += Convert.ToInt32(direction.Substring(1));
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                    positions.Add(cable1Horizontal + i + ":" + cable1Vertical);
+                                cable1Horizontal += Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'U':
                                 for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
-                                    positions.Add(currentHorPosition + ":" + (currentVerPosition + i));
-                                currentVerPosition += Convert.ToInt32(direction.Substring(1));
+                                    positions.Add(cable1Horizontal + ":" + (cable1Vertical + i));
+                                cable1Vertical += Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'L':
-                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
-                                    positions.Add((currentHorPosition - 1) + ":" + currentVerPosition);
-                                currentHorPosition -= Convert.ToInt32(direction.Substring(1));
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                    positions.Add((cable1Horizontal - i) + ":" + cable1Vertical);
+                                cable1Horizontal -= Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'D':
-                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
-                                    positions.Add(currentHorPosition + ":" + (currentVerPosition - i));
-                                currentVerPosition += Convert.ToInt32(direction.Substring(1));
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
+                                    positions.Add(cable1Horizontal + ":" + (cable1Vertical - i));
+                                cable1Vertical -= Convert.ToInt32(direction.Substring(1));
                                 break;
                             default:
                                 break;
                         }
                     }
 
-                    lineCounter++;
+                    // Increase line count to calculate second cable
+                    lineCount++;
                 }
                 else
                 {
-                    currentHorPosition = 0;
-                    currentVerPosition = 0;
+                    cable1Horizontal = 0;
+                    cable1Vertical = 0;
+
+                    directionsSplit = line.Split(',');
 
                     foreach (var direction in directionsSplit)
                     {
+                        // Left no is horizontal and right is vertical
+
                         switch (direction[0])
                         {
                             case 'R':
                                 for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
                                 {
-                                    currentHorPosition += i;
-                                    if (positions.Contains(i + ":" + currentVerPosition))
-                                        intersections.Add(i + ":" + currentVerPosition);
+                                    if (positions.Contains((cable1Horizontal + i) + ":" + cable1Vertical))
+                                        intersections.Add((cable1Horizontal + i) + ":" + cable1Vertical);
                                 }
+                                cable1Horizontal += Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'U':
                                 for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
                                 {
-                                    currentHorPosition += i;
-                                    if (positions.Contains(currentHorPosition + ":" + i))
-                                        intersections.Add(currentHorPosition + ":" + i);
+                                    if (positions.Contains(cable1Horizontal + ":" + (cable1Vertical + i)))
+                                        intersections.Add(cable1Horizontal + ":" + (cable1Vertical + i));
                                 }
+                                cable1Vertical += Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'L':
-                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
                                 {
-                                    currentHorPosition -= i;
-                                    if (positions.Contains(i + ":" + currentVerPosition))
-                                        intersections.Add(i + ":" + currentVerPosition);
+                                    if (positions.Contains((cable1Horizontal - i) + ":" + cable1Vertical))
+                                        intersections.Add((cable1Horizontal - i) + ":" + cable1Vertical);
                                 }
+                                cable1Horizontal -= Convert.ToInt32(direction.Substring(1));
                                 break;
                             case 'D':
-                                for (int i = Convert.ToInt32(direction.Substring(1)); i > 0; i--)
+                                for (int i = 1; i <= Convert.ToInt32(direction.Substring(1)); i++)
                                 {
-                                    currentHorPosition -= i;
-                                    if (positions.Contains(currentHorPosition + ":" + i))
-                                        intersections.Add(currentHorPosition + ":" + i);
+                                    if (positions.Contains(cable1Horizontal + ":" + (cable1Vertical - i)))
+                                        intersections.Add(cable1Horizontal + ":" + (cable1Vertical - i));
                                 }
+                                cable1Vertical -= Convert.ToInt32(direction.Substring(1));
                                 break;
                             default:
                                 break;
                         }
                     }
-                }
 
-                foreach (var intersection in intersections)
-                {
-                    string[] items = intersection.Split(":");
-                    totals.Add(items[0] + items[1]);
+                    // Add together the intersections to get total distance
+                    foreach (var intersection in intersections)
+                    {
+                        string[] items = intersection.Split(":");
+                        var result = Convert.ToInt32(items[0]) + Convert.ToInt32(items[1]);
+
+                        // Distance need to be above 0
+                        if (result > 0)
+                            totals.Add(result);
+                    }
+
+                    // Get lowest distance
+                    int lowestDistance = totals.Min();
+                    Console.WriteLine(lowestDistance);
+
+                    Console.ReadLine();
                 }
             }
         }
