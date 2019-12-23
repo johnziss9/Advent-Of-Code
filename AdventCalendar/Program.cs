@@ -14,10 +14,10 @@ namespace AdventCalendar
             string[] directionsSplit = null;
             int cable1Horizontal = 0;
             int cable1Vertical = 0;
-            List<string> positions = new List<string>();
-            List<string> intersections = new List<string>();
-            List<int> totals = new List<int>();
-            
+            List<string> positions = new List<string>(); // Records each position of the first cable after every move
+            List<string> intersections = new List<string>(); // Stores all the intersections cable 2 hits on
+            List<int> totals = new List<int>(); // Stores the total of the vertical and horizontal distance from 0 for each intersection
+
             StreamReader file = new StreamReader(@"Input.txt");
 
             while ((line = file.ReadLine()) != null)
@@ -116,7 +116,7 @@ namespace AdventCalendar
                         string[] items = intersection.Split(":");
                         var result = Convert.ToInt32(items[0]) + Convert.ToInt32(items[1]);
 
-                        // Distance need to be above 0
+                        // Distance needs to be above 0
                         if (result > 0)
                             totals.Add(result);
                     }
