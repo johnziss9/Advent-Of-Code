@@ -43,7 +43,7 @@ namespace AdventCalendar
                             previous = Convert.ToInt32(n - '0');
                         }
                     }
-
+                    // *************************************** HAVE NOT STARTED THIS (PART 2) YET ****************************************
                     if (sequental)
                     {
                         previous = -1;
